@@ -1,0 +1,51 @@
+{
+  "name": "steadfeed-site-audit-mcp",
+  "version": "0.2.1",
+  "description": "MCP server that lets AI agents run website-audit tools (schema/AI-readiness, accessibility, tech stack, PageSpeed, AI-crawler access, page change monitoring, pay-transparency posting monitor) through your own Apify account.",
+  "type": "module",
+  "main": "src/main.js",
+  "bin": {
+    "steadfeed-site-audit-mcp": "src/stdio.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "server.json",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/main.js",
+    "stdio": "node src/stdio.js",
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "apify",
+    "seo",
+    "accessibility",
+    "pagespeed",
+    "llms-txt",
+    "site-audit",
+    "pay-transparency"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.0",
+    "apify": "^3.7.2",
+    "zod": "^3.25.0"
+  },
+  "mcpName": "io.github.steadfeed-dev/steadfeed-site-audit-mcp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steadfeed-dev/steadfeed-site-audit-mcp.git"
+  },
+  "homepage": "https://github.com/steadfeed-dev/steadfeed-site-audit-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/steadfeed-dev/steadfeed-site-audit-mcp/issues"
+  },
+  "author": "steadfeed-dev"
+}

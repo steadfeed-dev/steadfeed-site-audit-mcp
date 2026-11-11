@@ -1,0 +1,20 @@
+{
+  "actorSpecification": 1,
+  "name": "steadfeed-site-audit-mcp",
+  "title": "Site Audit MCP Server",
+  "description": "MCP server for AI agents: schema/AI-readiness, accessibility, tech-stack, PageSpeed, AI-crawler access and page-change and pay-transparency posting audits, run through your own Apify account.",
+  "version": "0.1",
+  "buildTag": "development",
+  "meta": {
+    "templateId": "js-empty"
+  },
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile",
+  "readme": "../README.md",
+  "usesStandbyMode": true,
+  "webServerMcpPath": "/mcp",
+  "minMemoryMbytes": 256,
+  "maxMemoryMbytes": 512,
+  "defaultMemoryMbytes": 256,
+  "output": "./output_schema.json"
+}

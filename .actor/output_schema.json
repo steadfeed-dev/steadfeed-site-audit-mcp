@@ -1,0 +1,12 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Site Audit MCP Server",
+  "description": "This Actor is an MCP server (Standby mode). It produces no dataset: connect an MCP client to the endpoint below.",
+  "properties": {
+    "server": {
+      "type": "string",
+      "title": "MCP server (container URL)",
+      "template": "{{links.containerRunUrl}}/mcp"
+    }
+  }
+}

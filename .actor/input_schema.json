@@ -1,0 +1,7 @@
+{
+  "title": "Site Audit MCP Server",
+  "type": "object",
+  "schemaVersion": 1,
+  "description": "This Actor runs in Standby mode as an MCP server. You do not need to start it manually or fill in any input: connect an MCP client to its Standby URL (see the Server / API tab) with your Apify token as a Bearer token. See the README.",
+  "properties": {}
+}
