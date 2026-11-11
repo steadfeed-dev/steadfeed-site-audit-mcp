@@ -9,32 +9,6 @@
     "url": "https://github.com/steadfeed-dev/steadfeed-site-audit-mcp",
     "source": "github"
   },
-  "packages": [
-    {
-      "registryType": "npm",
-      "registryBaseUrl": "https://registry.npmjs.org",
-      "identifier": "steadfeed-site-audit-mcp",
-      "version": "0.2.1",
-      "runtimeHint": "npx",
-      "transport": {
-        "type": "stdio"
-      },
-      "environmentVariables": [
-        {
-          "name": "APIFY_TOKEN",
-          "description": "Your Apify API token (https://console.apify.com/settings/integrations). Tools run public Apify Actors on your account.",
-          "isRequired": true,
-          "isSecret": true
-        },
-        {
-          "name": "GOOGLE_PSI_API_KEY",
-          "description": "Optional free Google PageSpeed Insights API key, only for the audit_pagespeed tool.",
-          "isRequired": false,
-          "isSecret": true
-        }
-      ]
-    }
-  ],
   "remotes": [
     {
       "type": "streamable-http",

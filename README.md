@@ -36,21 +36,21 @@ Use the Actor's Standby URL (shown in the **Server / API** tab, `https://steadfe
 }
 ```
 
-## Run locally (open source, MIT)
+## Run locally (open source, MIT; runs straight from GitHub, no npm package)
 
 ```json
 {
   "mcpServers": {
     "steadfeed-site-audit": {
       "command": "npx",
-      "args": ["-y", "steadfeed-site-audit-mcp"],
+      "args": ["-y", "github:steadfeed-dev/steadfeed-site-audit-mcp"],
       "env": { "APIFY_TOKEN": "<YOUR_APIFY_API_TOKEN>", "GOOGLE_PSI_API_KEY": "<optional, for audit_pagespeed>" }
     }
   }
 }
 ```
 
-Or from source: `npm install && APIFY_TOKEN=... npm run stdio`.
+Or clone and run it yourself: `git clone https://github.com/steadfeed-dev/steadfeed-site-audit-mcp && cd steadfeed-site-audit-mcp && npm install`, then point your MCP client at `node /path/to/steadfeed-site-audit-mcp/src/stdio.js` with `APIFY_TOKEN` in the environment.
 
 ## Example prompts
 
