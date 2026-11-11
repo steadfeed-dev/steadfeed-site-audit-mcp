@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { TOOLS, ACTOR_OWNER, defaultCapUsd, MIN_CAP_USD } from './tools.js';
 import { runActorSync, formatResult, ApifyCallError } from './apify.js';
 
-export const SERVER_INFO = { name: 'site-audit', version: '0.2.1' };
+export const SERVER_INFO = { name: 'site-audit', version: '0.2.2' };
 
 /**
  * @param {{getToken:()=>string|undefined, env?:object, onToolSuccess?:(tool:object)=>Promise<void>, fetchImpl?:typeof fetch}} opts

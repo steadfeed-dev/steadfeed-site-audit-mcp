@@ -1,6 +1,6 @@
 {
   "name": "steadfeed-site-audit-mcp",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "MCP server that lets AI agents run website-audit tools (schema/AI-readiness, accessibility, tech stack, PageSpeed, AI-crawler access, page change monitoring, pay-transparency posting monitor) through your own Apify account.",
   "type": "module",
   "main": "src/main.js",
@@ -46,5 +46,9 @@
   "bugs": {
     "url": "https://github.com/steadfeed-dev/steadfeed-site-audit-mcp/issues"
   },
-  "author": "steadfeed-dev"
+  "author": "steadfeed-dev",
+  "overrides": {
+    "basic-ftp": "6.2.6",
+    "minimatch": "11.0.7"
+  }
 }

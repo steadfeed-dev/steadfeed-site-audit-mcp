@@ -3,7 +3,7 @@
   "name": "io.github.steadfeed-dev/steadfeed-site-audit-mcp",
   "title": "Site Audit MCP Server",
   "description": "Seven website-audit tools for AI agents: schema, WCAG, tech stack, PageSpeed, AI crawlers, changes.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "websiteUrl": "https://apify.com/steadfeed/steadfeed-site-audit-mcp",
   "repository": {
     "url": "https://github.com/steadfeed-dev/steadfeed-site-audit-mcp",
