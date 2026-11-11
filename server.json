@@ -2,10 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.steadfeed-dev/steadfeed-site-audit-mcp",
   "title": "Site Audit MCP Server",
-  "description": "Website audit tools for AI agents: schema/AI-readiness, WCAG accessibility, tech stack, PageSpeed, AI-crawler access, page changes, pay-transparency posting monitor. Runs on your own Apify account.",
+  "description": "Seven website-audit tools for AI agents: schema, WCAG, tech stack, PageSpeed, AI crawlers, changes.",
   "version": "0.2.1",
   "websiteUrl": "https://apify.com/steadfeed/steadfeed-site-audit-mcp",
-  "repository": { "url": "https://github.com/steadfeed-dev/steadfeed-site-audit-mcp", "source": "github" },
+  "repository": {
+    "url": "https://github.com/steadfeed-dev/steadfeed-site-audit-mcp",
+    "source": "github"
+  },
   "packages": [
     {
       "registryType": "npm",
@@ -13,10 +16,22 @@
       "identifier": "steadfeed-site-audit-mcp",
       "version": "0.2.1",
       "runtimeHint": "npx",
-      "transport": { "type": "stdio" },
+      "transport": {
+        "type": "stdio"
+      },
       "environmentVariables": [
-        { "name": "APIFY_TOKEN", "description": "Your Apify API token (https://console.apify.com/settings/integrations). Tools run public Apify Actors on your account.", "isRequired": true, "isSecret": true },
-        { "name": "GOOGLE_PSI_API_KEY", "description": "Optional free Google PageSpeed Insights API key, only for the audit_pagespeed tool.", "isRequired": false, "isSecret": true }
+        {
+          "name": "APIFY_TOKEN",
+          "description": "Your Apify API token (https://console.apify.com/settings/integrations). Tools run public Apify Actors on your account.",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "GOOGLE_PSI_API_KEY",
+          "description": "Optional free Google PageSpeed Insights API key, only for the audit_pagespeed tool.",
+          "isRequired": false,
+          "isSecret": true
+        }
       ]
     }
   ],
@@ -25,7 +40,12 @@
       "type": "streamable-http",
       "url": "https://steadfeed--steadfeed-site-audit-mcp.apify.actor/mcp",
       "headers": [
-        { "name": "Authorization", "description": "Bearer <your Apify API token>", "isRequired": true, "isSecret": true }
+        {
+          "name": "Authorization",
+          "description": "Bearer <your Apify API token>",
+          "isRequired": true,
+          "isSecret": true
+        }
       ]
     }
   ]
