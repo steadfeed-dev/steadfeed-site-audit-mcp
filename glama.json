@@ -1,4 +1,4 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
-  "maintainers": ["steadfeed-dev"]
+  "maintainers": ["steadfeed-dev", "steadfeed-maint"]
 }
