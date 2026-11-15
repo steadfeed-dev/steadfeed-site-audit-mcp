@@ -50,7 +50,7 @@ export function createServer({ getToken, env = {}, onToolSuccess, fetchImpl, pro
             title: tool.title,
             description: tool.description,
             inputSchema: tool.shape,
-            annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: tool.name !== 'monitor_page_changes', openWorldHint: true },
+            annotations: { readOnlyHint: !['monitor_page_changes', 'monitor_pay_transparency'].includes(tool.name), destructiveHint: false, idempotentHint: tool.name !== 'monitor_page_changes', openWorldHint: true },
         }, async (args) => {
             try {
                 const bad = tool.validate?.(args, env);

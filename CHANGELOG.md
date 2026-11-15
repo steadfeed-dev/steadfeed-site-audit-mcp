@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0 (unreleased, private branch `ai-visibility`)
+- New `ai_visibility_report`: one call runs AI-crawler access, schema/llms.txt, mobile PageSpeed, accessibility and tech-stack checks in parallel and returns a plain-English summary with a 0-100 readiness score and prioritized fixes. Not charged when the core checks fail.
+- New `check_ai_search_visibility`: wraps the AI Search Visibility Tracker (caller's own OpenAI/Perplexity key; refuses without a key unless dryRun).
+- Tool profiles (`MCP_TOOL_PROFILE`): `all` (Site Audit MCP) and `ai-visibility` (the focused AI Visibility connector), one codebase.
+- Read-only audit tools are now annotated `readOnlyHint: true` (helps ChatGPT accounts limited to read/fetch tools).
+
+
 ## 0.2.2
 - Security: override `basic-ftp` to 6.2.6 and `minimatch` to 11.0.7 to clear npm audit findings in production transitive dependencies. Tool names, pricing and behavior are unchanged.
 - The remaining `zod` audit finding is not patched here: the only published fix is Zod 4.6.6+, a breaking major upgrade. This package stays on Zod 3; the advisory describes a Zod 4 parser path (`$ZodArray`), and our tool schemas already cap array lengths.
