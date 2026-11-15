@@ -105,6 +105,57 @@ export const TOOLS = [
     },
 ];
 
+
+/** AI Search Visibility Tracker: asks AI assistants buyer questions with the CALLER's own AI keys. */
+export const AI_VISIBILITY_TOOL = {
+    name: 'check_ai_search_visibility',
+    actor: 'ai-search-visibility-tracker',
+    unitPriceUsd: 0.01,
+    title: 'AI search visibility check (ChatGPT / Perplexity answers)',
+    description: 'Ask ChatGPT (OpenAI API) and/or Perplexity the questions your buyers ask and measure how often your brand is named, its rank against competitors, which sites are cited and the tone. Needs YOUR OWN OpenAI and/or Perplexity API key (AI usage is billed by them to you, about $0.0002-0.002 per answer) plus $0.01 per analysed answer on Apify. Without keys, use dryRun to see the format for free. Keys are passed to Apify as secret input and never returned.',
+    shape: {
+        brand: z.string().min(1).max(80).describe('Your brand name, e.g. "Steadfeed".'),
+        brandDomain: z.string().max(100).optional().describe('Your domain, e.g. getsteadfeed.com, to check whether AI answers cite your site.'),
+        competitors: z.array(z.string().min(1).max(80)).max(10).optional().describe('Up to 10 competitor names.'),
+        prompts: z.array(z.string().min(5).max(300)).min(1).max(10).describe('1-10 questions a buyer would ask, e.g. "What is the best tool to check pay transparency in job posts?"'),
+        providers: z.array(z.enum(['openai', 'perplexity'])).min(1).max(2).optional().describe('Which AI assistants to ask (default: the ones you supplied a key for).'),
+        runsPerPrompt: z.number().int().min(1).max(3).optional().describe('Ask each question this many times (default 1).'),
+        openaiApiKey: z.string().min(20).max(300).optional().describe('Your OpenAI API key (optional if OPENAI_API_KEY is set where the server runs locally).'),
+        perplexityApiKey: z.string().min(20).max(300).optional().describe('Your Perplexity API key (optional if PERPLEXITY_API_KEY is set where the server runs locally).'),
+        maxCostUsd: maxCost,
+        dryRun: z.boolean().optional().describe('Mock answers with no AI keys and no AI cost, to preview the output.'),
+    },
+    resolveKeys(a, env = {}) {
+        return { openai: a.openaiApiKey || env.OPENAI_API_KEY || undefined, perplexity: a.perplexityApiKey || env.PERPLEXITY_API_KEY || undefined };
+    },
+    providersFor(a, env) {
+        if (a.providers?.length) return a.providers;
+        const k = this.resolveKeys(a, env);
+        const p = Object.keys(k).filter((x) => k[x]);
+        return p.length ? p : ['openai'];
+    },
+    buildInput(a, env) {
+        const k = this.resolveKeys(a, env);
+        const providers = this.providersFor(a, env);
+        return {
+            brand: a.brand, ...(a.brandDomain && { brandDomain: a.brandDomain }), ...(a.competitors?.length && { competitors: a.competitors }),
+            prompts: a.prompts, providers, runsPerPrompt: a.runsPerPrompt ?? 1, maxCalls: 60,
+            ...(providers.includes('openai') && k.openai && !a.dryRun && { openaiApiKey: k.openai }),
+            ...(providers.includes('perplexity') && k.perplexity && !a.dryRun && { perplexityApiKey: k.perplexity }),
+            ...(a.dryRun && { dryRun: true }),
+        };
+    },
+    validate(a, env) {
+        if (a.dryRun) return null;
+        const k = this.resolveKeys(a, env);
+        const missing = this.providersFor(a, env).filter((p) => !k[p]);
+        if (missing.length) return `This check needs your own ${missing.map((p) => (p === 'openai' ? 'OpenAI' : 'Perplexity')).join(' and ')} API key (AI usage is billed by that provider to you). Pass it in ${missing.map((p) => `${p}ApiKey`).join(' / ')}, or set dryRun:true to preview the output for free.`;
+        return null;
+    },
+    unitsOf: (a) => a.prompts.length * (a.runsPerPrompt ?? 1) * (a.providers?.length ?? 1),
+};
+TOOLS.push(AI_VISIBILITY_TOOL);
+
 export const START_FEE_USD = 0.00005;
 export const DEFAULT_CAP_PADDING_USD = 0.01;
 /** Apify rejects runs whose maxTotalChargeUsd is below $0.05 for some Actors. */

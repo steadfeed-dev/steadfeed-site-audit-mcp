@@ -6,6 +6,8 @@ import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/
 import { createServer } from './server.js';
 
 export const TOOL_CALL_EVENT = 'tool-call';
+import { REPORT_EVENT, REPORT_TOOL_NAME } from './report.js';
+const PROFILE = process.env.MCP_TOOL_PROFILE || 'all';
 
 await Actor.init();
 
@@ -33,7 +35,7 @@ const httpServer = http.createServer(async (req, res) => {
         if (req.headers['x-apify-container-server-readiness-probe']) { res.writeHead(200).end('ok'); return; }
         const path = new URL(req.url, 'http://localhost').pathname;
         if (path === '/' && req.method === 'GET') {
-            res.writeHead(200, { 'content-type': 'text/plain' }).end('Site Audit MCP server. POST MCP requests to /mcp with "Authorization: Bearer <your Apify token>".');
+            res.writeHead(200, { 'content-type': 'text/plain' }).end(`${PROFILE === 'ai-visibility' ? 'AI Visibility' : 'Site Audit'} MCP server. POST MCP requests to /mcp with "Authorization: Bearer <your Apify token>", or connect through https://mcp.apify.com with OAuth.`);
             return;
         }
         if (path !== '/mcp') { res.writeHead(404).end('Not found'); return; }
@@ -44,7 +46,8 @@ const httpServer = http.createServer(async (req, res) => {
         const token = tokenFrom(req) || (runTokenIsCallers ? process.env.APIFY_TOKEN : undefined);
         const server = createServer({
             getToken: () => token,
-            onToolSuccess: async () => { try { await Actor.charge({ eventName: TOOL_CALL_EVENT, count: 1 }); } catch (e) { log.warning(`charge failed: ${e.message}`); } },
+            profile: PROFILE,
+            onToolSuccess: async (tool) => { try { await Actor.charge({ eventName: tool?.name === REPORT_TOOL_NAME ? REPORT_EVENT : TOOL_CALL_EVENT, count: 1 }); } catch (e) { log.warning(`charge failed: ${e.message}`); } },
         });
         const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
         res.on('close', () => { transport.close(); server.close(); });

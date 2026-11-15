@@ -20,12 +20,12 @@ const okFetch = (calls, items = [{ url: 'https://example.com/', status: 'ok' }])
 };
 
 describe('tool catalogue', () => {
-    it('exposes seven tools mapped to public steadfeed actors', async () => {
+    it('exposes the Site Audit tools mapped to public steadfeed actors', async () => {
         const client = await connect({ getToken: () => 'tok' });
         const { tools } = await client.listTools();
-        assert.deepEqual(tools.map((t) => t.name).sort(), ['audit_accessibility', 'audit_ai_crawler_access', 'audit_pagespeed', 'audit_schema_ai_readiness', 'detect_tech_stack', 'monitor_page_changes', 'monitor_pay_transparency']);
+        assert.deepEqual(tools.map((t) => t.name).sort(), ['audit_accessibility', 'audit_ai_crawler_access', 'audit_pagespeed', 'audit_schema_ai_readiness', 'detect_tech_stack', 'monitor_page_changes', 'monitor_pay_transparency', 'check_ai_search_visibility', 'ai_visibility_report'].sort());
         for (const t of tools) { assert.ok(t.description.length > 40); assert.equal(t.inputSchema.type, 'object'); }
-        assert.equal(TOOLS.length, 7);
+        assert.equal(TOOLS.length, 8);
     });
 });
 

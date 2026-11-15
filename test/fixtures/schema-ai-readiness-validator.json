@@ -1,0 +1,110 @@
+[{
+  "recordType": "page",
+  "status": "ok",
+  "url": "https://getsteadfeed.com/",
+  "finalUrl": "https://getsteadfeed.com/",
+  "httpStatus": 200,
+  "error": null,
+  "elapsedMs": 145,
+  "checkedAt": "2026-11-15T20:47:32.373Z",
+  "dryRun": false,
+  "meta": {
+    "title": "Steadfeed — Small, practical web and data tools",
+    "description": "Steadfeed makes small, practical web and data tools: pay-transparency screening for HR, website and AI-visibility audits, page monitoring and an MCP server. Pay per use on Apify, no subscriptions.",
+    "canonical": "https://getsteadfeed.com/",
+    "h1": "Small, practical tools for the web and your data.",
+    "robotsMeta": null,
+    "openGraph": {
+      "title": "Steadfeed — Small, practical web and data tools",
+      "description": "Steadfeed makes small, practical web and data tools: pay-transparency screening for HR, website and AI-visibility audits, page monitoring and an MCP server. Pay per use on Apify, no subscriptions.",
+      "type": "website",
+      "url": "https://getsteadfeed.com/",
+      "image": "https://getsteadfeed.com/assets/og-steadfeed.png",
+      "siteName": null
+    },
+    "twitter": {
+      "card": "summary_large_image",
+      "title": null,
+      "description": null,
+      "image": null
+    }
+  },
+  "jsonLd": {
+    "blockCount": 0,
+    "validBlocks": 0,
+    "invalidBlocks": 0,
+    "types": [],
+    "typeCounts": {}
+  },
+  "llmsTxt": {
+    "checked": true,
+    "present": false,
+    "url": "https://getsteadfeed.com/llms.txt",
+    "byteLength": 0,
+    "status": 404
+  },
+  "robots": {
+    "present": true,
+    "url": "https://getsteadfeed.com/robots.txt",
+    "aiAgents": {
+      "GPTBot": {
+        "matched": "*",
+        "disallowAll": false
+      },
+      "ChatGPT-User": {
+        "matched": "*",
+        "disallowAll": false
+      },
+      "Google-Extended": {
+        "matched": "*",
+        "disallowAll": false
+      },
+      "anthropic-ai": {
+        "matched": "*",
+        "disallowAll": false
+      },
+      "ClaudeBot": {
+        "matched": "*",
+        "disallowAll": false
+      },
+      "PerplexityBot": {
+        "matched": "*",
+        "disallowAll": false
+      },
+      "Applebot-Extended": {
+        "matched": "*",
+        "disallowAll": false
+      },
+      "Bytespider": {
+        "matched": "*",
+        "disallowAll": false
+      }
+    }
+  },
+  "readiness": {
+    "score": 53,
+    "band": "moderate",
+    "findings": [
+      {
+        "severity": "warn",
+        "code": "no_jsonld",
+        "message": "No valid JSON-LD (application/ld+json) found in static HTML."
+      },
+      {
+        "severity": "info",
+        "code": "no_llms_txt",
+        "message": "No llms.txt at origin (optional AI guidance file)."
+      }
+    ],
+    "suggestions": [
+      "Add schema.org JSON-LD for Organization/WebSite (and Article or Product where relevant).",
+      "Consider publishing /llms.txt with a short site summary and key URLs for AI agents.",
+      "This score does not guarantee search rankings or AI citations."
+    ]
+  },
+  "relatedActors": {
+    "aiCrawlerAccessAuditor": "steadfeed/ai-crawler-access-auditor",
+    "aiSearchVisibilityTracker": "steadfeed/ai-search-visibility-tracker"
+  },
+  "disclaimer": "Informational extraction only. Does not guarantee search rankings, rich results, or AI citations."
+}]

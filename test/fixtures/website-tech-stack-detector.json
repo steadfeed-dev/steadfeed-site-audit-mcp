@@ -1,0 +1,19 @@
+[{
+  "recordType": "domain",
+  "status": "ok",
+  "url": "https://getsteadfeed.com/",
+  "finalUrl": "https://getsteadfeed.com/",
+  "host": "getsteadfeed.com",
+  "httpStatus": 200,
+  "error": null,
+  "elapsedMs": 85,
+  "checkedAt": "2026-11-15T20:47:30.681Z",
+  "dryRun": false,
+  "stack": {
+    "technologies": [],
+    "categories": {},
+    "evidenceCount": 0
+  },
+  "serverHeader": "GitHub.com",
+  "disclaimer": "Heuristic detection from public HTML and response headers. Not a complete inventory; versions are usually not detected. Curated Steadfeed fingerprints (not Wappalyzer/GPL data)."
+}]

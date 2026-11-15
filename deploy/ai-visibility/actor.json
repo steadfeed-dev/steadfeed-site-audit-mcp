@@ -1,0 +1,17 @@
+{
+  "actorSpecification": 1,
+  "name": "ai-visibility-mcp",
+  "title": "AI Visibility MCP Server",
+  "description": "Connect ChatGPT, Claude or any MCP client and ask in plain English: can AI assistants find, read and understand my website? One-call AI visibility report with prioritized fixes, plus AI-crawler access, schema/llms.txt, PageSpeed, accessibility and real ChatGPT/Perplexity answer checks.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile",
+  "readme": "../README.md",
+  "usesStandbyMode": true,
+  "webServerMcpPath": "/mcp",
+  "minMemoryMbytes": 256,
+  "maxMemoryMbytes": 512,
+  "defaultMemoryMbytes": 256,
+  "environmentVariables": { "MCP_TOOL_PROFILE": "ai-visibility" }
+}

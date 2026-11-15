@@ -1,0 +1,478 @@
+[{
+  "status": "ok",
+  "input": "https://getsteadfeed.com",
+  "site": "https://getsteadfeed.com",
+  "redirectedFrom": null,
+  "verdict": "open",
+  "headline": "No access problems found for the AI search crawlers we checked.",
+  "summary": "No access problems found for the AI search crawlers we checked. robots.txt allows the AI search crawlers. AI training crawlers are allowed too. Allowing a crawler only makes your pages available to it. It does not guarantee that any AI assistant or search engine will index, cite, recommend or rank your site.",
+  "aiSearchAccess": "allowed",
+  "userFetchAccess": "allowed",
+  "trainingAccess": "allowed",
+  "searchEngineAccess": "allowed",
+  "firewallSignals": 0,
+  "cdn": "Fastly",
+  "confirmed": [
+    "robots.txt found: 1 group(s), 5 line(s).",
+    "robots.txt allows OAI-SearchBot (ChatGPT search), PerplexityBot (Perplexity search results), Claude-SearchBot (Claude search) and Applebot (Siri, Spotlight and Safari search) on all audited pages.",
+    "AI training crawlers allowed by robots.txt: GPTBot, ClaudeBot, Google-Extended, Applebot-Extended and CCBot. Block them only if you do not want your content used for training; it will not affect the AI search crawlers above.",
+    "/ answered HTTP 200 to a normal browser request.",
+    "No /llms.txt file. llms.txt is an optional, proposed format. The major AI crawler operators do not document using it, so it is not needed for access."
+  ],
+  "uncertain": [
+    "Test requests named as OAI-SearchBot, ChatGPT-User, GPTBot, PerplexityBot, Perplexity-User, Claude-SearchBot, Claude-User, ClaudeBot, Googlebot, Applebot, CCBot and Bingbot got the normal page. Real crawlers come from their own IP addresses, so IP-based firewall rules could still treat them differently."
+  ],
+  "suggestedActions": [
+    {
+      "priority": "low",
+      "action": "No access problems found for the AI search crawlers we checked. Access is only the first step; to see whether AI assistants actually mention you, measure it with the AI Search Visibility Tracker."
+    },
+    {
+      "priority": "info",
+      "action": "Measure whether ChatGPT, Perplexity and others actually mention your brand: https://apify.com/steadfeed/ai-search-visibility-tracker"
+    }
+  ],
+  "fixes": [],
+  "crawlers": [
+    {
+      "token": "OAI-SearchBot",
+      "vendor": "OpenAI",
+      "purpose": "ai-search",
+      "purposeLabel": "AI search crawlers",
+      "product": "ChatGPT search",
+      "followsRobotsTxt": "honors",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": "https://openai.com/searchbot.json",
+      "docs": "https://platform.openai.com/docs/bots",
+      "whenBlocked": "OpenAI says sites that opt out of OAI-SearchBot are not shown in ChatGPT search answers (they can still appear as plain navigational links)."
+    },
+    {
+      "token": "ChatGPT-User",
+      "vendor": "OpenAI",
+      "purpose": "user-fetch",
+      "purposeLabel": "AI user-request fetchers",
+      "product": "ChatGPT visiting a page a user asked about",
+      "followsRobotsTxt": "may not apply",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": "https://openai.com/chatgpt-user.json",
+      "docs": "https://platform.openai.com/docs/bots",
+      "whenBlocked": "ChatGPT may be unable to open your page when a user asks about it. OpenAI says robots.txt rules may not apply to these user-initiated visits, and this agent does not decide search inclusion."
+    },
+    {
+      "token": "GPTBot",
+      "vendor": "OpenAI",
+      "purpose": "training",
+      "purposeLabel": "AI training crawlers",
+      "product": "OpenAI model training",
+      "followsRobotsTxt": "honors",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": "https://openai.com/gptbot.json",
+      "docs": "https://platform.openai.com/docs/bots",
+      "whenBlocked": "Signals that your content should not be used to train OpenAI models. OpenAI documents this as independent of OAI-SearchBot (ChatGPT search)."
+    },
+    {
+      "token": "PerplexityBot",
+      "vendor": "Perplexity",
+      "purpose": "ai-search",
+      "purposeLabel": "AI search crawlers",
+      "product": "Perplexity search results",
+      "followsRobotsTxt": "honors",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": "https://www.perplexity.ai/perplexitybot.json",
+      "docs": "https://docs.perplexity.ai/guides/bots",
+      "whenBlocked": "Perplexity recommends allowing PerplexityBot for your site to appear in Perplexity search results."
+    },
+    {
+      "token": "Perplexity-User",
+      "vendor": "Perplexity",
+      "purpose": "user-fetch",
+      "purposeLabel": "AI user-request fetchers",
+      "product": "Perplexity visiting a page a user asked about",
+      "followsRobotsTxt": "generally ignores",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": "https://www.perplexity.ai/perplexity-user.json",
+      "docs": "https://docs.perplexity.ai/guides/bots",
+      "whenBlocked": "Perplexity may be unable to open your page for a user's question. Perplexity says this fetcher generally ignores robots.txt, so firewall rules matter more than robots.txt here."
+    },
+    {
+      "token": "Claude-SearchBot",
+      "vendor": "Anthropic",
+      "purpose": "ai-search",
+      "purposeLabel": "AI search crawlers",
+      "product": "Claude search",
+      "followsRobotsTxt": "honors",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": null,
+      "docs": "https://support.claude.com/en/articles/8896518",
+      "whenBlocked": "Anthropic says disabling Claude-SearchBot may reduce your visibility and accuracy in Claude's search results."
+    },
+    {
+      "token": "Claude-User",
+      "vendor": "Anthropic",
+      "purpose": "user-fetch",
+      "purposeLabel": "AI user-request fetchers",
+      "product": "Claude visiting a page a user asked about",
+      "followsRobotsTxt": "honors",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": null,
+      "docs": "https://support.claude.com/en/articles/8896518",
+      "whenBlocked": "Anthropic says disabling Claude-User stops Claude retrieving your content for a user's question, which may reduce visibility for user-directed search."
+    },
+    {
+      "token": "ClaudeBot",
+      "vendor": "Anthropic",
+      "purpose": "training",
+      "purposeLabel": "AI training crawlers",
+      "product": "Anthropic model training",
+      "followsRobotsTxt": "honors",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": null,
+      "docs": "https://support.claude.com/en/articles/8896518",
+      "whenBlocked": "Signals that your future content should be excluded from Anthropic's training data. Separate from Claude-SearchBot and Claude-User."
+    },
+    {
+      "token": "Google-Extended",
+      "vendor": "Google",
+      "purpose": "training",
+      "purposeLabel": "AI training crawlers",
+      "product": "Gemini training and grounding",
+      "followsRobotsTxt": "control token only",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "not-tested",
+      "liveCheckDetail": "Google-Extended is a robots.txt control name only; it never visits sites, so there is nothing to test.",
+      "liveCheckHttpStatus": null,
+      "liveCheckVendor": null,
+      "ipRanges": null,
+      "docs": "https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers",
+      "whenBlocked": "Google says Google-Extended controls use in Gemini model training and grounding, and does not affect inclusion or ranking in Google Search. It has no user-agent of its own, so it cannot be tested with a request."
+    },
+    {
+      "token": "Googlebot",
+      "vendor": "Google",
+      "purpose": "search",
+      "purposeLabel": "Classic search engines",
+      "product": "Google Search, including its AI features",
+      "followsRobotsTxt": "honors",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": "https://developers.google.com/static/search/apis/ipranges/googlebot.json",
+      "docs": "https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers",
+      "whenBlocked": "Google says Googlebot rules affect Google Search and all its features. Blocking it removes most of your organic Google presence."
+    },
+    {
+      "token": "Applebot",
+      "vendor": "Apple",
+      "purpose": "ai-search",
+      "purposeLabel": "AI search crawlers",
+      "product": "Siri, Spotlight and Safari search",
+      "followsRobotsTxt": "honors (follows Googlebot rules if Applebot is not named)",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": "https://search.developer.apple.com/applebot.json",
+      "docs": "https://support.apple.com/en-us/119829",
+      "whenBlocked": "Apple says allowing Applebot lets your content appear in search results in Spotlight, Siri and Safari."
+    },
+    {
+      "token": "Applebot-Extended",
+      "vendor": "Apple",
+      "purpose": "training",
+      "purposeLabel": "AI training crawlers",
+      "product": "Apple model training",
+      "followsRobotsTxt": "control token only",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "not-tested",
+      "liveCheckDetail": "Applebot-Extended is a robots.txt control name only; it never visits sites, so there is nothing to test.",
+      "liveCheckHttpStatus": null,
+      "liveCheckVendor": null,
+      "ipRanges": null,
+      "docs": "https://support.apple.com/en-us/119829",
+      "whenBlocked": "Apple says disallowing Applebot-Extended opts out of training Apple's foundation models; pages can still appear in Apple search. It does not crawl, so it cannot be tested with a request."
+    },
+    {
+      "token": "CCBot",
+      "vendor": "Common Crawl",
+      "purpose": "training",
+      "purposeLabel": "AI training crawlers",
+      "product": "Common Crawl open dataset (widely used for AI training)",
+      "followsRobotsTxt": "honors",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": "https://index.commoncrawl.org/ccbot.json",
+      "docs": "https://commoncrawl.org/ccbot",
+      "whenBlocked": "Keeps your pages out of new Common Crawl snapshots, an open web archive that many AI models are trained on."
+    },
+    {
+      "token": "Bingbot",
+      "vendor": "Microsoft",
+      "purpose": "search",
+      "purposeLabel": "Classic search engines",
+      "product": "Bing Search and Microsoft Copilot",
+      "followsRobotsTxt": "honors",
+      "robotsTxt": "allowed",
+      "robotsTxtDetail": "Allowed on all audited pages by the catch-all group User-agent: * (line 1).",
+      "robotsTxtGroup": "User-agent: * (line 1)",
+      "robotsTxtMatchedAs": "wildcard",
+      "robotsTxtPages": [
+        {
+          "path": "/",
+          "allowed": true,
+          "rule": "Allow: /",
+          "line": 2
+        }
+      ],
+      "pageDirectives": [],
+      "noindexPages": [],
+      "liveCheck": "ok",
+      "liveCheckDetail": "HTTP 200, same as a normal browser request.",
+      "liveCheckHttpStatus": 200,
+      "liveCheckVendor": null,
+      "ipRanges": "https://www.bing.com/toolbox/bingbot.json",
+      "docs": "https://www.bing.com/webmasters/help/which-crawlers-does-bing-use-8c184ec0",
+      "whenBlocked": "Blocking Bingbot removes your pages from Bing, whose index also feeds Microsoft Copilot answers."
+    }
+  ],
+  "extraUserAgents": [],
+  "robotsTxt": {
+    "url": "https://getsteadfeed.com/robots.txt",
+    "state": "found",
+    "httpStatus": 200,
+    "note": "robots.txt found: 1 group(s), 5 line(s).",
+    "groups": 1,
+    "sitemaps": [
+      "https://getsteadfeed.com/sitemap.xml"
+    ],
+    "contentSignals": [],
+    "cloudflareManaged": false,
+    "issues": []
+  },
+  "pages": [
+    {
+      "path": "/",
+      "url": "https://getsteadfeed.com/",
+      "httpStatus": 200,
+      "result": "ok",
+      "evidence": "HTTP 200",
+      "metaRobots": [],
+      "xRobotsTag": []
+    }
+  ],
+  "llmsTxt": {
+    "present": false,
+    "status": 404,
+    "note": "No /llms.txt file."
+  },
+  "visibilityTracker": "https://apify.com/steadfeed/ai-search-visibility-tracker",
+  "disclaimer": "Allowing a crawler only makes your pages available to it. It does not guarantee that any AI assistant or search engine will index, cite, recommend or rank your site.",
+  "auditedAt": "2026-11-15T20:47:44.633Z",
+  "durationMs": 14050
+}]

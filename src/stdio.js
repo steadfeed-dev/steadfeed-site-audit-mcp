@@ -8,5 +8,5 @@ if (!token) {
     console.error('APIFY_TOKEN is not set. Create a token at https://console.apify.com/settings/integrations and export it before starting this server.');
     process.exit(1);
 }
-const server = createServer({ getToken: () => token, env: { GOOGLE_PSI_API_KEY: process.env.GOOGLE_PSI_API_KEY } });
+const server = createServer({ getToken: () => token, profile: process.env.MCP_TOOL_PROFILE || 'all', env: { GOOGLE_PSI_API_KEY: process.env.GOOGLE_PSI_API_KEY, OPENAI_API_KEY: process.env.OPENAI_API_KEY, PERPLEXITY_API_KEY: process.env.PERPLEXITY_API_KEY } });
 await server.connect(new StdioServerTransport());
