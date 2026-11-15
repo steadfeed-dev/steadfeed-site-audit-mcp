@@ -7,7 +7,7 @@ mkdir -p "$OUT"
 APIFY_TOKEN="$(apify auth token 2>/dev/null | tail -1)"; export APIFY_TOKEN
 [ ${#APIFY_TOKEN} -gt 20 ] || { echo "Apify CLI is not logged in"; exit 1; }
 "$HERE/stage.sh" "$STAGE"
-( cd "$STAGE" && apify push --no-prompt 2>&1 | grep -v -i token | tail -5 )
+( cd "$STAGE" && apify push -w 300 < /dev/null 2>&1 | grep -v -i token | tail -8 )
 # Keep it private; single-tenant so each caller's run (and bill) is their own.
 apify api PUT "acts/steadfeed~ai-visibility-mcp" -d '{"isPublic":false,"actorStandby":{"isEnabled":true,"tenancy":"SINGLE_TENANT","desiredRequestsPerActorRun":4,"maxRequestsPerActorRun":8,"idleTimeoutSecs":120,"memoryMbytes":256}}' >/dev/null
 URL="https://steadfeed--ai-visibility-mcp.apify.actor/mcp"
