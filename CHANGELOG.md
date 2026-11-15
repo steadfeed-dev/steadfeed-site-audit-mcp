@@ -1,9 +1,10 @@
 # Changelog
 
-## 0.3.0 (unreleased, private branch `ai-visibility`)
+## 0.3.0 (2026-11-15)
 - New `ai_visibility_report`: one call runs AI-crawler access, schema/llms.txt, mobile PageSpeed, accessibility and tech-stack checks in parallel and returns a plain-English summary with a 0-100 readiness score and prioritized fixes. Not charged when the core checks fail.
 - New `check_ai_search_visibility`: wraps the AI Search Visibility Tracker (caller's own OpenAI/Perplexity key; refuses without a key unless dryRun).
 - Tool profiles (`MCP_TOOL_PROFILE`): `all` (Site Audit MCP) and `ai-visibility` (the focused AI Visibility connector), one codebase.
+- Reports with fewer than 2 of the 4 core checks are labeled "limited result" and not charged.
 - Read-only audit tools are now annotated `readOnlyHint: true` (helps ChatGPT accounts limited to read/fetch tools).
 
 

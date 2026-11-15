@@ -13,5 +13,9 @@
   "minMemoryMbytes": 256,
   "maxMemoryMbytes": 512,
   "defaultMemoryMbytes": 256,
-  "environmentVariables": { "MCP_TOOL_PROFILE": "ai-visibility" }
+  "environmentVariables": {
+    "MCP_TOOL_PROFILE": "ai-visibility",
+    "REPORT_GOOGLE_PSI_API_KEY": "@steadfeedReportPsiKey"
+  },
+  "output": "./output_schema.json"
 }

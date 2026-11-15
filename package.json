@@ -1,7 +1,7 @@
 {
   "name": "steadfeed-site-audit-mcp",
-  "version": "0.2.2",
-  "description": "MCP server that lets AI agents run website-audit tools (schema/AI-readiness, accessibility, tech stack, PageSpeed, AI-crawler access, page change monitoring, pay-transparency posting monitor) through your own Apify account.",
+  "version": "0.3.0",
+  "description": "MCP server that lets AI agents run website-audit tools (one-call AI visibility report, AI search visibility, schema/AI-readiness, accessibility, tech stack, PageSpeed, AI-crawler access, page change monitoring, pay-transparency posting monitor) through your own Apify account.",
   "type": "module",
   "main": "src/main.js",
   "bin": {
@@ -22,15 +22,19 @@
     "test": "node --test test/*.test.js"
   },
   "keywords": [
+    "accessibility",
+    "aeo",
+    "ai-search",
+    "ai-visibility",
+    "apify",
+    "geo",
+    "llms-txt",
     "mcp",
     "model-context-protocol",
-    "apify",
-    "seo",
-    "accessibility",
     "pagespeed",
-    "llms-txt",
-    "site-audit",
-    "pay-transparency"
+    "pay-transparency",
+    "seo",
+    "site-audit"
   ],
   "license": "MIT",
   "dependencies": {

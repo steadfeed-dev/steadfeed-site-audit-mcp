@@ -11,6 +11,12 @@ const PROFILE = process.env.MCP_TOOL_PROFILE || 'all';
 
 await Actor.init();
 
+/** The report event if this Actor's pricing has it, otherwise the generic tool-call event. */
+function chargeEventFor(tool) {
+    if (tool?.name !== REPORT_TOOL_NAME) return TOOL_CALL_EVENT;
+    try { const prices = Actor.getChargingManager().getPricingInfo()?.perEventPrices ?? {}; return REPORT_EVENT in prices ? REPORT_EVENT : TOOL_CALL_EVENT; } catch { return TOOL_CALL_EVENT; }
+}
+
 // Apify removes the caller's Authorization header / ?token= before forwarding a Standby request, so the token never
 // reaches this code. This Actor is SINGLE-TENANT: the platform starts a separate run in the CALLER's account, so this
 // run's own APIFY_TOKEN belongs to the caller and the underlying Actors are billed to them. We only use it when the
@@ -47,7 +53,9 @@ const httpServer = http.createServer(async (req, res) => {
         const server = createServer({
             getToken: () => token,
             profile: PROFILE,
-            onToolSuccess: async (tool) => { try { await Actor.charge({ eventName: tool?.name === REPORT_TOOL_NAME ? REPORT_EVENT : TOOL_CALL_EVENT, count: 1 }); } catch (e) { log.warning(`charge failed: ${e.message}`); } },
+            // Only the report calls Google directly with this key; it is never passed into any Actor run input or output.
+            env: { REPORT_GOOGLE_PSI_API_KEY: process.env.REPORT_GOOGLE_PSI_API_KEY },
+            onToolSuccess: async (tool) => { try { await Actor.charge({ eventName: chargeEventFor(tool), count: 1 }); } catch (e) { log.warning(`charge failed: ${e.message}`); } },
         });
         const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
         res.on('close', () => { transport.close(); server.close(); });

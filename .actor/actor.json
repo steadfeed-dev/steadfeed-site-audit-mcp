@@ -16,5 +16,8 @@
   "minMemoryMbytes": 256,
   "maxMemoryMbytes": 512,
   "defaultMemoryMbytes": 256,
-  "output": "./output_schema.json"
+  "output": "./output_schema.json",
+  "environmentVariables": {
+    "REPORT_GOOGLE_PSI_API_KEY": "@steadfeedReportPsiKey"
+  }
 }

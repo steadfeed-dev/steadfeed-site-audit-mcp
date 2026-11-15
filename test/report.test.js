@@ -67,3 +67,20 @@ describe('profiles', () => {
         assert.ok(r.isError); assert.match(r.content[0].text, /OpenAI API key/);
     });
 });
+
+describe('limited result', () => {
+    it('labels reports with fewer than 2 checks as limited and not billable', () => {
+        const r = summarize({ home: 'https://x.test/', pages: ['https://x.test/'], results: { crawler: { ok: true, items: [{ status: 'ok', verdict: 'open', headline: 'ok', suggestedActions: [] }] }, schema: { ok: true, items: [{ status: 'error', url: 'https://x.test/', httpStatus: 403 }] } } });
+        assert.equal(r.limited, true); assert.equal(r.billable, false); assert.equal(r.score, null); assert.equal(r.band, 'limited result');
+        assert.match(r.summary, /LIMITED RESULT/);
+    });
+    it('a server-side report key is used for Google only and scrubbed from errors', async () => {
+        const key = 'AIzaSERVERKEY-0123456789abcdefghij';
+        const calls = [];
+        const seen = [];
+        const r = await runReport({ url: 'https://getsteadfeed.com' }, { token: 't', env: { REPORT_GOOGLE_PSI_API_KEY: key }, runImpl: fakeRun(calls), fetchImpl: async (u) => { seen.push(String(u)); throw new Error(`boom ${u}`); } });
+        assert.ok(seen[0].includes(key));
+        assert.ok(!JSON.stringify(calls).includes(key));
+        assert.ok(!JSON.stringify(r).includes(key));
+    });
+});

@@ -6,5 +6,5 @@ rm -rf "$OUT"; mkdir -p "$OUT"
 tar -C "$ROOT" --exclude=./node_modules --exclude=./.git --exclude=./deploy --exclude=./storage -cf - . | tar -C "$OUT" -xf -
 cp "$ROOT/deploy/ai-visibility/actor.json" "$OUT/.actor/actor.json"
 [ -f "$ROOT/deploy/ai-visibility/README.md" ] && cp "$ROOT/deploy/ai-visibility/README.md" "$OUT/README.md"
-rm -f "$OUT/.actor/output_schema.json"
+cp "$ROOT/deploy/ai-visibility/output_schema.json" "$OUT/.actor/output_schema.json"
 echo "staged at $OUT"

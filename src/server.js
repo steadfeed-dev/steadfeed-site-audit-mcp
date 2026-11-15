@@ -35,7 +35,7 @@ export function createServer({ getToken, env = {}, onToolSuccess, fetchImpl, pro
                 if (!token) throw new ApifyCallError('No Apify API token. Connect with your Apify account (OAuth) or pass "Authorization: Bearer <token>".', 401);
                 const report = await runReport(args, { token, env, fetchImpl });
                 if (!report.coreOk) return { isError: true, content: [{ type: 'text', text: `Could not build a report for ${report.site}, so nothing was charged for the report.\n${report.notIncluded.map((x) => `- ${x}`).join('\n')}${report.fixes.length ? `\n\nWhat this suggests:\n${report.fixes.map((f) => `- ${f.fix}`).join('\n')}` : ''}` }] };
-                await onToolSuccess?.(REPORT_TOOL);
+                if (report.billable) await onToolSuccess?.(REPORT_TOOL);
                 const { summary, ...data } = report;
                 return { content: [{ type: 'text', text: summary }, { type: 'text', text: JSON.stringify(data, null, 1).slice(0, 60_000) }] };
             } catch (err) {

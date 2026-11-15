@@ -66,8 +66,9 @@ export async function runReport(args, { token, env = {}, fetchImpl = fetch, runI
     if (args.includeTechStack !== false) jobs.techStack = run('website-tech-stack-detector', { urls: [home] }, 0.05);
     if (args.includePageSpeed !== false) {
         // Called directly from this server (never passed into a run input), so a server-side key is never exposed to callers.
-        const key = args.googleApiKey || env.GOOGLE_PSI_API_KEY;
-        jobs.pageSpeed = psiCall({ url: home, key, fetchImpl }).then((r) => ({ ok: true, items: [r], runId: null, keyless: !key }), (e) => ({ ok: false, error: e.message }));
+        const key = args.googleApiKey || env.REPORT_GOOGLE_PSI_API_KEY || env.GOOGLE_PSI_API_KEY;
+        const scrub = (m) => (key ? String(m).split(key).join('***') : String(m));
+        jobs.pageSpeed = psiCall({ url: home, key, fetchImpl }).then((r) => ({ ok: true, items: [r], runId: null, keyless: !key }), (e) => ({ ok: false, error: scrub(e?.name === 'AbortError' ? 'Google PageSpeed took too long to answer.' : e.message) }));
     }
     let aiCheckNote = null;
     if (args.brand) {
@@ -175,14 +176,17 @@ export function summarize({ home, pages, results, aiCheckNote }) {
     const parts = [[crawlerPts, 35], [schemaPts, 30], [speedPts, 15], [a11yPts, 10]].filter(([p]) => p !== null);
     const max = parts.reduce((s, [, m]) => s + m, 0);
     const score = max ? Math.round((parts.reduce((s, [p]) => s + p, 0) / max) * 100) : null;
-    const band = score === null ? 'unknown' : score >= 80 ? 'strong' : score >= 60 ? 'fair' : score >= 40 ? 'weak' : 'poor';
+    const limited = parts.length < 2;
+    const band = score === null ? 'unknown' : limited ? 'limited result' : score >= 80 ? 'strong' : score >= 60 ? 'fair' : score >= 40 ? 'weak' : 'poor';
     const order = { high: 0, medium: 1, low: 2 };
     fixes.sort((a, b) => order[a.priority] - order[b.priority]);
     const dedup = [...new Map(fixes.map((f) => [f.fix, f])).values()].slice(0, 10);
 
     const lines = [];
     lines.push(`AI visibility report for ${home}`);
-    lines.push(score === null ? 'Score: not available (the checks did not complete).' : `AI-readiness score: ${score}/100 (${band}), based on ${parts.length} of 4 checks.`);
+    if (score === null) lines.push('Score: not available (the checks did not complete).');
+    else if (limited) lines.push(`LIMITED RESULT: only ${parts.length} of 4 checks could run, so there is no overall score (the one check that ran scored ${score}/100). This report was not charged.`);
+    else lines.push(`AI-readiness score: ${score}/100 (${band}), based on ${parts.length} of 4 checks.`);
     if (sections.crawlerAccess?.headline) lines.push(`Crawler access: ${sections.crawlerAccess.headline}`);
     if (sections.schemaReadiness) lines.push(`Structured data and page basics: ${sections.schemaReadiness.averageScore}/100 across ${sections.schemaReadiness.pages.length} page(s).`);
     if (sections.pageSpeed) lines.push(`Mobile speed: ${sections.pageSpeed.mobilePerformance}/100.`);
@@ -193,5 +197,5 @@ export function summarize({ home, pages, results, aiCheckNote }) {
     if (skipped.length) lines.push('', 'Not included this time:', ...skipped.map((s) => `- ${s}`));
     lines.push('', 'Note: this measures whether AI systems can reach and understand the site. It does not guarantee rankings or AI citations.');
 
-    return { site: home, pagesChecked: pages, score, band, summary: lines.join('\n'), fixes: dedup, working: good, sections, notIncluded: skipped, runIds, coreOk: crawlerPts !== null || schemaPts !== null };
+    return { site: home, pagesChecked: pages, score: limited ? null : score, partialScore: limited ? score : undefined, limited, checksCompleted: parts.length, band, summary: lines.join('\n'), fixes: dedup, working: good, sections, notIncluded: skipped, runIds, coreOk: crawlerPts !== null || schemaPts !== null, billable: parts.length >= 2 };
 }

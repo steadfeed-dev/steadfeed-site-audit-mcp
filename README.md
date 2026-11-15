@@ -1,9 +1,11 @@
 # Site Audit MCP Server
 
-Give your AI agent (Claude, Cursor, VS Code, ChatGPT-style MCP clients, n8n, custom agents) a set of **website-audit tools**. Each tool runs one of public Apify Actors **on your own Apify account**, so you see every run and every cost in your Apify console.
+Give your AI agent (Claude, Cursor, VS Code, ChatGPT-style MCP clients, n8n, custom agents) a set of **website-audit tools**. Only want the AI-visibility part? Use the focused [AI Visibility MCP Server](https://apify.com/steadfeed/ai-visibility-mcp), built from this same code (`MCP_TOOL_PROFILE=ai-visibility`). Each tool runs one of public Apify Actors **on your own Apify account**, so you see every run and every cost in your Apify console.
 
 | Tool | What it does | Underlying Actor | Price of that Actor |
 |---|---|---|---|
+| `ai_visibility_report` | **One call: can AI assistants reach, read and understand this site?** Runs crawler access, structured data / llms.txt, mobile PageSpeed, accessibility and tech stack together and returns a plain-English summary, a 0-100 readiness score and prioritized fixes | The audit Actors below | about $0.015 of checks per homepage; not charged when fewer than 2 of 4 checks can run |
+| `check_ai_search_visibility` | Ask ChatGPT and/or Perplexity your buyers' questions and measure whether your brand is named, its rank, cited sites and tone. Needs your own OpenAI / Perplexity key | [AI Search Visibility Tracker](https://apify.com/steadfeed/ai-search-visibility-tracker) | $0.01 / answer |
 | `audit_schema_ai_readiness` | JSON-LD, Open Graph, canonical, llms.txt, AI-crawler robots cues | [Schema & AI-Readiness Validator](https://apify.com/steadfeed/schema-ai-readiness-validator) | $0.003 / page |
 | `audit_accessibility` | axe-core WCAG 2.x checks (static HTML) | [Accessibility WCAG / EAA Checker](https://apify.com/steadfeed/accessibility-wcag-checker) | $0.005 / page |
 | `detect_tech_stack` | CMS, frameworks, analytics, tags, CDN | [Website Tech-Stack Detector](https://apify.com/steadfeed/website-tech-stack-detector) | $0.002 / domain |
@@ -17,7 +19,7 @@ Only **public pages** are checked. Nothing logs in, bypasses paywalls or bot pro
 ## Cost
 
 * The underlying Actor's normal pay-per-event price (table above), billed to **your** Apify account.
-* Plus this server's own fee on the hosted version: **$0.001 per successful tool call** (and a $0.00005 start event). Running the open-source package locally (below) has no wrapper fee.
+* Plus this server's own fee on the hosted version: **$0.001 per successful tool call**, or $0.01 per `ai_visibility_report` where that event is priced (and a $0.00005 start event). Running the open-source package locally (below) has no wrapper fee.
 * Every call has a **hard spend cap** (`maxTotalChargeUsd`) sized from the number of URLs (minimum $0.05, Apify's per-run minimum, so a one-page check can never cost more than $0.05). Override it with `maxCostUsd` ($0.05 to $5).
 * Add `dryRun: true` to preview with sample data at near-zero cost (not available for the AI-crawler and page-change tools).
 
@@ -55,6 +57,7 @@ Or clone and run it yourself: `git clone https://github.com/steadfeed-dev/steadf
 ## Example prompts
 
 * "Audit https://example.com and https://example.com/pricing for structured data and AI readiness, then tell me the three highest-impact fixes."
+* "Give me an AI visibility report for example.com."
 * "Can AI crawlers read our site? Check example.com."
 * "Run an accessibility check on our checkout and landing pages and group the issues by severity."
 * "Watch these 5 competitor pricing pages and tell me what meaningfully changed since last time" (call `monitor_page_changes` again with the same `watchlistId`).

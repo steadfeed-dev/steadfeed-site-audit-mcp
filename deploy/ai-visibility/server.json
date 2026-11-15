@@ -1,0 +1,16 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.steadfeed-dev/ai-visibility-mcp",
+  "title": "AI Visibility MCP Server",
+  "description": "One-call AI visibility report: can ChatGPT, Claude and Perplexity reach and understand your site?",
+  "version": "0.3.0",
+  "websiteUrl": "https://apify.com/steadfeed/ai-visibility-mcp",
+  "repository": { "url": "https://github.com/steadfeed-dev/steadfeed-site-audit-mcp", "source": "github" },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://steadfeed--ai-visibility-mcp.apify.actor/mcp",
+      "headers": [ { "name": "Authorization", "description": "Bearer <your Apify API token>", "isRequired": true, "isSecret": true } ]
+    }
+  ]
+}
