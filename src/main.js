@@ -4,6 +4,7 @@ import http from 'node:http';
 import { Actor, log } from 'apify';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { createServer } from './server.js';
+import { serveGlamaJsonIfRequested } from './glama.js';
 
 export const TOOL_CALL_EVENT = 'tool-call';
 import { REPORT_EVENT, REPORT_TOOL_NAME } from './report.js';
@@ -40,6 +41,7 @@ const httpServer = http.createServer(async (req, res) => {
     try {
         if (req.headers['x-apify-container-server-readiness-probe']) { res.writeHead(200).end('ok'); return; }
         const path = new URL(req.url, 'http://localhost').pathname;
+        if (serveGlamaJsonIfRequested(path, req.method, res)) return;
         if (path === '/' && req.method === 'GET') {
             res.writeHead(200, { 'content-type': 'text/plain' }).end(`${PROFILE === 'ai-visibility' ? 'AI Visibility' : 'Site Audit'} MCP server. POST MCP requests to /mcp with "Authorization: Bearer <your Apify token>", or connect through https://mcp.apify.com with OAuth.`);
             return;

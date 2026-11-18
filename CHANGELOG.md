@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+- Hosted endpoint serves a public GET at `/mcp/.well-known/glama.json` and `/.well-known/glama.json` so Glama can verify connector ownership. Tools, pricing and input schema are unchanged.
+
+
 ## 0.3.0 (2026-11-15)
 - New `ai_visibility_report`: one call runs AI-crawler access, schema/llms.txt, mobile PageSpeed, accessibility and tech-stack checks in parallel and returns a plain-English summary with a 0-100 readiness score and prioritized fixes. Not charged when the core checks fail.
 - New `check_ai_search_visibility`: wraps the AI Search Visibility Tracker (caller's own OpenAI/Perplexity key; refuses without a key unless dryRun).
