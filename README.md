@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.png" alt="getsteadfeed" height="72">
+</p>
+
 # Site Audit MCP Server
 
 Give your AI agent (Claude, Cursor, VS Code, ChatGPT-style MCP clients, n8n, custom agents) a set of **website-audit tools**. Only want the AI-visibility part? Use the focused [AI Visibility MCP Server](https://apify.com/steadfeed/ai-visibility-mcp), built from this same code (`MCP_TOOL_PROFILE=ai-visibility`). Each tool runs one of public Apify Actors **on your own Apify account**, so you see every run and every cost in your Apify console.
